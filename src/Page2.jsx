@@ -34,9 +34,9 @@ class Page2 extends Component {
 			</p>
 
 	  	{			
-			this.state.items.map(listItem =>
-													 (<li key = {listItem.itemId}>
-														{listItem.name}
+			this.state.items.map(item =>
+													 (<li key = {item.itemId}>
+														{item.name}
 													</li>))
 		  }
       </div>

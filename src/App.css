@@ -1,10 +1,143 @@
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.titles{
+  height: 10vh;
+  background-color: navy;
+  color: white;
+  line-height: 10vh;
+  font-size: 20pt;
+}
+
+
+.home{
+  color: navy;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 10vh;
+  background: lightcoral;
+  color: white;
+}
+
+.login{
+  color: navy;
+  width: 75vh;
+  text-align: center;
+  margin: auto;
+  height: 75vh;
+}
+
+.showlistsTitle{
+  background-color: navy;
+  height: 10vh;
+  line-height: 10vh;
+  color: white;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.addlisttitle{
+  height: 10vh;
+  background-color: navy;
+  color: white;
+  line-height: 10vh;
+  font-size: 20pt;
+}
+
+.addlist{
+  color: navy;
+}
+
+.newlistinput{
+  color: navy;
+}
+
+.showlists{
+  list-style-type: none;
+  color: navy;
+  align-items: flex-end;
+}
+
+.title{
+  background-color: navy;
+  color: white;
+  min-height: 10vh;
+  text-align: center;
+  line-height: 10vh;
+}
+
+.additemtitle{
+  color: white;
+  font-size: 20pt;
+}
+
+.showItems{
+  list-style-type: square;
+  width: 50vh;
+  background-image: url(LinesPaper.png);
+  color: black;
+  background-position: center;
+  margin: auto;
+  padding-bottom: 10%;
+  padding-top: 5%;
+  text-align: left;
+  padding-left: 5%;
+  font-family: cursive;
+  font-style: italic; 
+  font-size: 15pt;
+  min-height: 50vh;
+  background-size: 300px;
+  size: 20pt;
+ 
+}
+
+.addItem{
+  width: 75vh;
+  border-color: navy;
+  border-style: solid;
+  border-width: 4pt;
+  border-style: dashed;
+  background-color: lightcoral;
+  color: white;
+  margin: auto;
+}
+
+.addItemButton{
+  background-color: navy;
+  border: none;
+  color: white;
+  size: 45pt;
+  height: 5vh;
+  width: 7vh;
+}
+
+.select{
+ color: navy;
+}
+
+.deletebutton{
+  background-color: navy;
+  
+  color: white;
+  padding: 32 px;
+  height: 10vh;
+  width: 25vh;
+  font-size: 17pt;
+}
+
+.nav-links{
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
 }
 
 .App-header {
@@ -22,11 +155,5 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
+
