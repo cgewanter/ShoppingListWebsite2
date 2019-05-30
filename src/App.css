@@ -11,6 +11,9 @@
   font-size: 20pt;
 }
 
+.listoflists{
+  background-color: white;
+}
 
 .home{
   color: navy;
@@ -62,8 +65,9 @@ nav{
 .showlists{
   list-style-type: none;
   color: navy;
-  align-items: flex-end;
+  align-items: center;
 }
+
 
 .title{
   background-color: navy;
@@ -71,6 +75,8 @@ nav{
   min-height: 10vh;
   text-align: center;
   line-height: 10vh;
+  font-style: italic;
+  font-size: 30pt;
 }
 
 .additemtitle{
@@ -116,6 +122,15 @@ nav{
   size: 45pt;
   height: 5vh;
   width: 7vh;
+}
+
+.listsButton{
+  background-color: navy;
+  border-color: white;
+  color: white;
+  height: 8vh;
+  width: 40vh;
+  font-size: 15pt;
 }
 
 .select{

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
+import ShowLists from './ShowLists';
+import { Redirect } from 'react-router-dom'
 import cart from './cart2.jpg'
 
 class AddList extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { listTitle: "" };
+		this.state = { listTitle: "" , newList: false};
 	}
 
 	addList = () => {
@@ -21,14 +23,22 @@ class AddList extends Component {
 				"Content-Type": "application/json",
 			}
 		}
-		)
+		);
+		this.setState({newList: true}, ()=> console.log(this.state));
+		console.log("updated new list");
 	}
-
 	setListTitle = (e) => {
 		console.log(e);
 		this.setState({ listTitle: e.target.value });
 	}
 
+	showLists = () =>{
+		console.log("in showLists mehtod");
+		if (this.state.newList ===true){
+			console.log("in if");
+			return(<Redirect to={ {pathname: '../showlists'}}/>);	
+			}
+	}
 
 
 	render() {
@@ -37,16 +47,15 @@ class AddList extends Component {
 				<div className = 'addlist'>
 				<p className = "addlisttitle">Add a List</p>
 
-				<img src={cart}></img>
+				<img src={cart} alt=""></img>
 				<br></br>
 				<br></br>
 				<br></br>
 				<input className = "newlistinput" id="listTitle" value={this.state.listTitle} placeholder="List Title" onChange={this.setListTitle} />
 
 				<button onClick={this.addList}>Add List</button>
-
+				{this.showLists()}
 				</div>
-
 			</React.Fragment >
 		);
 	}

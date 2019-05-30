@@ -12,8 +12,8 @@ class Home extends Component {
     return (
           <div className = "home"> 
               <h1>Welcome to the Shopping Site!</h1>
-              <h3>Please sign in to begin.</h3>
-              <img src = {cart}></img>
+              <h3>Please login or sign up to begin.</h3>
+              <img src = {cart} alt = ""></img>
           </div>
       );
     }

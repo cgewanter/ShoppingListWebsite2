@@ -10,7 +10,7 @@ class AddItem extends Component {
 			itemId: null,
 			foodId: null,
 			listId: null,
-			quantity: null,
+			quantity: 1,
 			notes: "",
 			size: null,
 			foodName: null,		
@@ -21,24 +21,6 @@ class AddItem extends Component {
 		console.log(this.state);
 		// cookie.load();
 	}
-	/* setItems = () => {
-		console.log("in setItems(), before if ")
-		if (this.state.ready ==true) {
-			console.log('in set items, state: ', this.state);
-			this.setState({
-				food:
-				{
-					foodId: this.state.foodId,
-					foodname: this.state.foodName,
-					size: this.state.size,
-					quantity: this.state.qty
-				}
-			});
-			this.setState((ready) => {
-				return { ready: true }
-			});
-		}
-	} */
 
 	addItem = () => {
 		console.log("in addItem() before if ")
@@ -56,7 +38,6 @@ class AddItem extends Component {
 					"Content-Type": "application/json",
 				}
 			});
-			{this.refresh()}
 		}
 		else {
 			return <p>Adding...</p>
@@ -77,6 +58,7 @@ class AddItem extends Component {
 	setQuantity = (e) => this.setState({quantity: e.label})
 
 	refresh(){
+		console.log("in refresh");
 		return (<ManageList/>)
 	}
 
@@ -141,40 +123,7 @@ class AddItem extends Component {
 			</React.Fragment>
 		);
 
-		/*<input id="foodname" placeholder="Food Name" onChange={this.setFoodname} />
-				<input id="quantity" value={this.state.quantity} placeholder="Qty" onChange={this.setId} />
-				<input id="size" value={this.state.size} placeholder="Size" onChange={this.setId} />
-				<input id="notes" value={this.state.notes} placeholder="Notes" onChange={this.setNotes} />
 
-				<button onClick={this.addItem}>Add Item</button>
-
-===========================================
-				Item  &nbsp;
-					<select form="newitem" name="pickfood">
-						<option value ="choose">Choose an item</option>
-						<option value="apple">Apple</option>
-						<option value="orange">Orange</option>
-						<option value="cherries">Cherries</option>
-					</select>
-					&nbsp;&nbsp;&nbsp;
-					
-					Qty &nbsp; 
-					<select form="newitem">
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-					</select>
-					&nbsp; &nbsp;&nbsp;
-					Size &nbsp;
-					<select form="newitem">
-						<option value="None">None</option>
-						<option value="Small">Small</option>
-						<option value="Medium">Medium</option>
-						<option value="Large">Large</option>
-
-					</select>
-============================================
-		*/
 	}
 }
 

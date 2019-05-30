@@ -3,12 +3,13 @@ import './App.css';
 import ShowLists from './ShowLists';
 import AddItem from './AddItem';
 import ShowDeleteMenu from './ShowDeleteMenu';
+import { Redirect } from 'react-router-dom'
 
 
 class ManageList extends Component {
   constructor(props) {
     super(props);
-    this.state = { mapItems: null, itemsList: null, listProp: null, foodItems: null, delete: false};
+    this.state = {mapItems: null, itemsList: null, listProp: null, foodItems: null, delete: false, deleteList: false};
   }
 
 
@@ -39,10 +40,16 @@ class ManageList extends Component {
           console.log("response");
           console.log(response);
           this.setState({ itemsList: response });
-
         })
       })
     console.log(this.state);
+  }
+
+  startDeleteList(){
+    console.log("in start delete list");
+    this.setState({deleteList: true});
+    this.deleteList();
+    return(<div>The list has been deleted</div>)
   }
 
   deleteList() {
@@ -58,8 +65,8 @@ class ManageList extends Component {
           }
         }
       );
+      this.setState({deleteList: true});
       console.log("deleted list");
-      return(<ShowLists/>);
     }
   }
 
@@ -84,9 +91,10 @@ class ManageList extends Component {
     fetch('http://localhost:8080/fooditems')
       .then((response) => {
         response.json().then((response) => {
-          console.log(response)
+          console.log(response);
           this.setState({ mapItems: response });
-          this.mapItems()
+          this.mapItems();
+          //this.listWasDeleted();
         })
       })
   }
@@ -107,8 +115,7 @@ class ManageList extends Component {
   deleteItem(){
     console.log("in delete item");
     console.log(this.state);
-    this.setState({delete: true});
-    
+    this.setState({delete: true});  
   }
 
   showDeleteMenu(){
@@ -117,6 +124,12 @@ class ManageList extends Component {
         console.log("delete is true");
         return(<ShowDeleteMenu list = {this.props.location.state.listId}  />)
     }  
+  }
+
+  goToShowList(){
+    if (this.state.deleteList ===true){
+      return(<Redirect to={ {pathname: '../showlists'}}/>);
+    }
   }
 
   render() {
@@ -129,19 +142,20 @@ class ManageList extends Component {
 
       <React.Fragment>
         <div className="ManageList">
-          <h2 className="title"> List</h2>
-          <div className="showItems">
+          <h2 className="title"> {this.props.location.state.listName}</h2>
+          <div className = "showItems">
             {this.state.itemsList ?
               this.state.itemsList.map(item =>
                 (<li key={item.itemId}>
                   {item.foodname} (size: {item.size}, qty: {item.quantity})
-            </li>))
+            </li>  ))
               :
               <h5>Data loading...</h5>
+              
             }
           </div>
-          <br />
-          <button className = "deletebutton" onClick={() => this.deleteList()}>Delete this list</button>
+          
+          <button className = "deletebutton" onClick={() => this.startDeleteList()}>Delete this list</button>
           <button className = "deletebutton" onClick={()=> this.deleteItem()}>Delete an item</button>
           <br /><br />
         </div>
@@ -151,6 +165,7 @@ class ManageList extends Component {
           {this.showDeleteMenu()}
           <br/> <br/>
           {this.showAddItem()}
+          {this.goToShowList()}
          
         </div>
       </React.Fragment>

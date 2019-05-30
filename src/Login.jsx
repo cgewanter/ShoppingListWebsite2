@@ -10,11 +10,12 @@ class Login extends Component {
     this.state = { username: "", newUser: false, loggedIn: false }
   }
 
+  changeUsername = (un) => {
+    this.setState({username: un.target.value});
+  }
+
 
   setUsername = (un) => {
-    console.log("setting username");
-    console.log(un);
-    this.setState({ username: un.target.value });
     console.log("username", this.state);
     fetch('http://localhost:8080/login', {
       method: "POST",
@@ -28,10 +29,10 @@ class Login extends Component {
     if (this.state.username !== "") {
       console.log("in if, setting loggedIn to true");
       this.setState({ loggedIn: true });
-
-      //this.setState({currentPage: 5})
       console.log("current state:");
       console.log(this.state);
+      console.log("cookie:");
+      console.log(document.cookie);
       return (<ShowLists />);
     }
     else return (<div> Error! </div>)
@@ -54,32 +55,15 @@ class Login extends Component {
     }
   }
 
-  /* nextPage = () => {
-    switch(this.state.currentPage){
-			case 1:
-			return <Page1/>
-			case 2:
-			return <Page2/>
-			case 3:
-			return <Login/>
-			case 4:
-			return <AddList/>
-			case 5:
-			return <ShowLists/>
-			default:
-			return <Login/>
-		}
-  } */
-
-
   render() {
+
     return (
 
       <React.Fragment>
 
         <p className="titles">Login</p>
         <div className="login">
-          <input id="username" value={this.state.username} placeholder="Username" onChange={this.setUsername}></input>
+          <input id="username" value={this.state.username} placeholder="Username" onChange={this.changeUsername}></input>
           <button onClick={this.setUsername}>Login</button>
           <br />
           <br />
