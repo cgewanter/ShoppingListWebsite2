@@ -11,7 +11,6 @@ class AddList extends Component {
 	}
 
 	addList = () => {
-
 		console.log("adding list");
 		console.log(this.state);
 
@@ -39,7 +38,6 @@ class AddList extends Component {
 			return(<Redirect to={ {pathname: '../showlists'}}/>);	
 			}
 	}
-
 
 	render() {
 		return (

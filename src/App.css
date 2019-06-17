@@ -66,6 +66,7 @@ nav{
   list-style-type: none;
   color: navy;
   align-items: center;
+  
 }
 
 
@@ -85,6 +86,9 @@ nav{
 }
 
 .showItems{
+  width: 15%;
+  height: 200px;
+  float: left;
   list-style-type: square;
   width: 50vh;
   background-image: url(LinesPaper.png);
@@ -104,8 +108,15 @@ nav{
  
 }
 
+.listContainer{
+  width: 80%;
+  height: 200px;
+  margin: auto;
+  padding: 10px;
+}
+
 .addItem{
-  width: 75vh;
+  float: right;
   border-color: navy;
   border-style: solid;
   border-width: 4pt;
@@ -113,6 +124,7 @@ nav{
   background-color: lightcoral;
   color: white;
   margin: auto;
+  width: 55vh;
 }
 
 .addItemButton{
@@ -138,8 +150,8 @@ nav{
 }
 
 .deletebutton{
+  margin-top: 12%;
   background-color: navy;
-  
   color: white;
   padding: 32 px;
   height: 10vh;

@@ -7,7 +7,6 @@ class NewUser extends Component {
     this.state = { firstname: "", lastname: "", username: "" };
   }
 
-
   setFirstname = (e) => {
     this.setState({ firstname: e.target.value });
   }
@@ -20,7 +19,7 @@ class NewUser extends Component {
     this.setState({ username: e.target.value });
   }
 
-  setNewUser = () => {
+  sendNewUser = () => {
     console.log("adding user");
     console.log(this.state);
     fetch('http://localhost:8080/newuser', {
@@ -29,16 +28,7 @@ class NewUser extends Component {
       headers: {
         "Content-Type": "application/json",
       }
-    });
-  }
-
-  displayMsg= ()=>{
-    return(
-        <div>
-          <p>A new user has been created. Login to continue.</p>
-        </div>
-    );
-
+    })
   }
 
 
@@ -46,13 +36,14 @@ class NewUser extends Component {
     return (
       <React.Fragment>
         <p>Please enter the following information:</p>
+        <p>Then login to continue.</p>
         <input id="firstname" value={this.state.firstname} placeholder="firstname"
           onChange={this.setFirstname} />
         <input id="lastname" value={this.state.lastname} placeholder="lastname"
           onChange={this.setLastname} />
         <input id="username" value={this.state.username} placeholder="username"
           onChange={this.setUsername} />
-        <button onClick={this.setNewUser}>Enter</button>
+        <button onClick={this.sendNewUser}>Enter</button>
       </React.Fragment>
     );
   }

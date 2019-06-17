@@ -2,33 +2,32 @@ import React, { Component } from 'react';
 import './App.css';
 import NewUser from './NewUser';
 import ShowLists from './ShowLists'
+import { Redirect } from 'react-router-dom'
 
 
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", newUser: false, loggedIn: false }
+    this.state = { username: "", newUser: false, loggedIn: false, response: null }
   }
 
   changeUsername = (un) => {
-    this.setState({username: un.target.value});
+    this.setState({ username: un.target.value });
   }
 
-
-  setUsername = (un) => {
+  performLogin = (e) => {
     console.log("username", this.state);
-    fetch('http://localhost:8080/login', {
-      method: "POST",
-      mode: "no-cors",
-      body: this.state.username,
-      headers: {
-        "Content-Type": "application/json",
-      }
-    }
-    )
     if (this.state.username !== "") {
-      console.log("in if, setting loggedIn to true");
-      this.setState({ loggedIn: true });
+      fetch('http://localhost:8080/processlogin', {
+        method: "POST",
+        mode: "no-cors",
+        body: this.state.username,
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+      ).then((r) => this.setState({ response: r }));
+
       console.log("current state:");
       console.log(this.state);
       console.log("cookie:");
@@ -40,7 +39,7 @@ class Login extends Component {
   setNewUser = () => {
     console.log("setting new user to true");
     this.setState({ newUser: true });
-    this.changePage()
+    this.displayLoginMsg();
   }
 
   newUser = () => {
@@ -49,32 +48,50 @@ class Login extends Component {
     }
   }
 
-  changePage = () => {
+  displayLoginMsg = () => {
+    if (this.state.response == null) {
+      return <p>:-)</p>;
+    }
+    else if (this.state.response.ok) {
+      console.log(this.state);
+      console.log("in if response is ok");
+      this.setState({ loggedIn: true });
+      return (<div><p>Welcome</p> <p>{this.state.username.toUpperCase}</p> <p> You are logged in.</p></div>);
+    }
+    else {
+      console.log("In else of dpsly login msg");
+      return (<p>Sorry, invalid login.</p>)
+    }
+  }
+
+  showUsersLists = () => {
     if (this.state.loggedIn === true) {
-      return (<p>Welcome! You are logged in.</p>);
+      return (<Redirect to=
+        {{
+          pathname: '../showlists',
+          state: { loggedIn: true }
+        }
+        } />);
     }
   }
 
   render() {
 
     return (
-
       <React.Fragment>
-
         <p className="titles">Login</p>
         <div className="login">
           <input id="username" value={this.state.username} placeholder="Username" onChange={this.changeUsername}></input>
-          <button onClick={this.setUsername}>Login</button>
+          <button onClick={this.performLogin}>Login</button>
           <br />
           <br />
-          <div />
 
           <button onClick={this.setNewUser}>New user?</button>
           <br />
           <br />
           {this.newUser()}
-          {this.changePage()}
-
+          {this.displayLoginMsg()}
+          {this.showUsersLists()}
         </div>
 
       </React.Fragment>

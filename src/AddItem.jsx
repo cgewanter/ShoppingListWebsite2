@@ -11,7 +11,6 @@ class AddItem extends Component {
 			foodId: null,
 			listId: null,
 			quantity: 1,
-			notes: "",
 			size: null,
 			foodName: null,		
 		};
@@ -19,25 +18,25 @@ class AddItem extends Component {
 	componentDidMount() {
 		console.log("This is componentDidMount() in show lists");
 		console.log(this.state);
-		// cookie.load();
+	
 	}
 
 	addItem = () => {
 		console.log("in addItem() before if ")
-		//this.setFood();
-		//this.setItems();
+		const x =this;
+		
 		if (this.state.foodId != null) {
 			console.log('in if of  addItem(), state:', this.state);
 			console.log("adding item");
 			console.log(this.state.food);
-			//this.state.items.push(this.state.foodname);
+		
 			fetch('http://localhost:8080/additem', {
 				method: "POST",
 				body: JSON.stringify(this.state),
 				headers: {
 					"Content-Type": "application/json",
 				}
-			});
+			}).then(()=> x.props.refreshItem());
 		}
 		else {
 			return <p>Adding...</p>
@@ -63,7 +62,7 @@ class AddItem extends Component {
 	}
 
 	render() {
-		//this.addItem();
+	
 		console.log("in render state and props");
 		console.log(this.state);
 		console.log(this.props);

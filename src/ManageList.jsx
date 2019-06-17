@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import ShowLists from './ShowLists';
 import AddItem from './AddItem';
-import ShowDeleteMenu from './ShowDeleteMenu';
 import { Redirect } from 'react-router-dom'
 
 
 class ManageList extends Component {
   constructor(props) {
     super(props);
-    this.state = {mapItems: null, itemsList: null, listProp: null, foodItems: null, delete: false, deleteList: false};
+    this.state = { mapItems: null, itemsList: null, listProp: null, foodItems: null, deleteList: false };
   }
 
 
@@ -22,6 +21,7 @@ class ManageList extends Component {
     // cookie.load();
     this.getData();
   }
+
 
   getData() {
     console.log("this is getData() of manageList. Props:");
@@ -45,11 +45,11 @@ class ManageList extends Component {
     console.log(this.state);
   }
 
-  startDeleteList(){
+  startDeleteList() {
     console.log("in start delete list");
-    this.setState({deleteList: true});
+    this.setState({ deleteList: true });
     this.deleteList();
-    return(<div>The list has been deleted</div>)
+    return (<div>The list has been deleted</div>)
   }
 
   deleteList() {
@@ -65,7 +65,7 @@ class ManageList extends Component {
           }
         }
       );
-      this.setState({deleteList: true});
+      this.setState({ deleteList: true });
       console.log("deleted list");
     }
   }
@@ -73,7 +73,7 @@ class ManageList extends Component {
   showAddItem = () => {
     if (this.state.foodItems != null) {
 
-      return (<AddItem foodItems={this.state.foodItems} />);
+      return (<AddItem foodItems={this.state.foodItems} refreshItems={this.getData} />);
     }
     else { console.log("fooditems is null in showAdditme") }
   }
@@ -94,7 +94,6 @@ class ManageList extends Component {
           console.log(response);
           this.setState({ mapItems: response });
           this.mapItems();
-          //this.listWasDeleted();
         })
       })
   }
@@ -112,23 +111,9 @@ class ManageList extends Component {
     else { console.log("foodItems is not null") };
   }
 
-  deleteItem(){
-    console.log("in delete item");
-    console.log(this.state);
-    this.setState({delete: true});  
-  }
-
-  showDeleteMenu(){
-    console.log("in show deleteMenu");
-    if (this.state.delete ==true){
-        console.log("delete is true");
-        return(<ShowDeleteMenu list = {this.props.location.state.listId}  />)
-    }  
-  }
-
-  goToShowList(){
-    if (this.state.deleteList ===true){
-      return(<Redirect to={ {pathname: '../showlists'}}/>);
+  goToShowList() {
+    if (this.state.deleteList === true) {
+      return (<Redirect to={{ pathname: '../showlists' }} />);
     }
   }
 
@@ -143,30 +128,30 @@ class ManageList extends Component {
       <React.Fragment>
         <div className="ManageList">
           <h2 className="title"> {this.props.location.state.listName}</h2>
-          <div className = "showItems">
-            {this.state.itemsList ?
-              this.state.itemsList.map(item =>
-                (<li key={item.itemId}>
-                  {item.foodname} (size: {item.size}, qty: {item.quantity})
-            </li>  ))
-              :
-              <h5>Data loading...</h5>
-              
-            }
-          </div>
-          
-          <button className = "deletebutton" onClick={() => this.startDeleteList()}>Delete this list</button>
-          <button className = "deletebutton" onClick={()=> this.deleteItem()}>Delete an item</button>
-          <br /><br />
-        </div>
-        <div>
 
+          <div className="listContainer">
+
+            <div className="showItems">
+              {this.state.itemsList ?
+                this.state.itemsList.map(item =>
+                  (<li key={item.itemId}>
+                    {item.foodname} (size: {item.size}, qty: {item.quantity})
+            </li>))
+                :
+                <h5>Data loading...</h5>
+              }
+            </div>
+            {this.showAddItem()}
+          </div>
+          <br />
+        </div>
+       
+        <div>
+        <button className="deletebutton" onClick={() => this.startDeleteList()}>Delete this list</button>
           {this.getFoodList()}
-          {this.showDeleteMenu()}
-          <br/> <br/>
-          {this.showAddItem()}
+          <br /> <br />
           {this.goToShowList()}
-         
+
         </div>
       </React.Fragment>
     );
@@ -174,4 +159,3 @@ class ManageList extends Component {
 }
 
 export default ManageList;
-

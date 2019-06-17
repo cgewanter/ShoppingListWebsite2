@@ -22,6 +22,9 @@ function Nav() {
                 <Link to="/showlists">
                     <li>Show My Lists</li>
                 </Link>
+                <Link to="/logout">
+                    <li>Logout</li>
+                </Link>
 
 
             </ul>
